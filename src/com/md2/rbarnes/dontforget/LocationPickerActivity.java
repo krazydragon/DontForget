@@ -1,3 +1,12 @@
+/*
+ * project	DontForget
+ * 
+ * package	com.md2.rbarnes.dontforget
+ * 
+ * @author	Ronaldo Barnes
+ * 
+ * date		May 16, 2013
+ */
 package com.md2.rbarnes.dontforget;
 
 import java.util.List;
@@ -8,7 +17,6 @@ import android.app.Activity;
 import android.app.SearchManager;
 import android.app.SearchableInfo;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;

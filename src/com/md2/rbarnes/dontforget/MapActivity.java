@@ -1,9 +1,17 @@
+/*
+ * project	DontForget
+ * 
+ * package	com.md2.rbarnes.dontforget
+ * 
+ * @author	Ronaldo Barnes
+ * 
+ * date		May 16, 2013
+ */
 package com.md2.rbarnes.dontforget;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -136,6 +144,7 @@ public class MapActivity extends Activity implements LocationListener{
     }
     
     private void setupMap(){
+		@SuppressWarnings("unused")
 		Marker resultPoint = map.addMarker(new MarkerOptions()
         .position(_latLng)
         .title("You are here!"));

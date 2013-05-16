@@ -1,3 +1,12 @@
+/*
+ * project	DontForget
+ * 
+ * package	com.md2.rbarnes.dontforget
+ * 
+ * @author	Ronaldo Barnes
+ * 
+ * date		May 16, 2013
+ */
 package com.md2.rbarnes.dontforget;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
@@ -51,7 +60,10 @@ public class MainActivity extends Activity{
 			Crouton.makeText(this, "calendar works", Style.INFO).show();
 			return true;
 		case R.id.action_list:
-			Crouton.makeText(this, "list works", Style.INFO).show();
+			
+			Intent listIntent = new Intent(this, ListViewActivity.class);
+			startActivity(listIntent);
+			
 			
 			return true;
 		default:
