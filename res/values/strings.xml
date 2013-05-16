@@ -9,5 +9,12 @@
     <string name="action_map">Map</string>
     <string name="action_calendar">Calendar</string>
     <string name="action_list">List</string>
+    <string name="location">Location</string>
+    <string name="reminder">Reminder</string>
+    <string name="find">Find</string>
+    <string name="title">Title</string>
+    <string name="save_button">Save</string>
+    <string name="notes">notes</string>
+    <string name="search">Search</string>
 
 </resources>
