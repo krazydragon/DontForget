@@ -5,9 +5,9 @@
     android:scrollbars="vertical" >
 
     <LinearLayout
-        android:id="@+id/LinearLayout1"
+        android:id="@+id/FormLayout"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical" >
 
         <ImageView
@@ -15,24 +15,25 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
+            android:contentDescription="@string/takenPic"
             android:src="@drawable/ic_launcher" />
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/captureButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/take_pic" />
 
         <LinearLayout
-            android:id="@+id/LinearLayout1"
+            android:id="@+id/ReminderLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
 
             <TextView
                 android:id="@+id/textView2"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="31dp"
                 android:layout_weight="0.67"
@@ -44,19 +45,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="left"
-                android:text="ToggleButton" />
+                android:text="@string/ReminderButton" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/LinearLayout01"
+            android:id="@+id/LocationLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.67"
             android:orientation="horizontal" >
 
             <TextView
                 android:id="@+id/TextView01"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="31dp"
                 android:layout_weight="0.67"
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="left"
-                android:text="ToggleButton" />
+                android:text="@string/LocationButton" />
         </LinearLayout>
 
         <EditText
@@ -90,7 +90,7 @@
             android:inputType="textMultiLine" />
 
         <Button
-            android:id="@+id/Button01"
+            android:id="@+id/saveButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/save_button" />

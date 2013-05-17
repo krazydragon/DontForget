@@ -54,8 +54,7 @@ public class MapActivity extends Activity implements LocationListener{
         Location location = locationManager.getLastKnownLocation(provider);
         
         
-		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
-		        .getMap();
+		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 		
 		// Initialize the location fields
         if (location != null) {

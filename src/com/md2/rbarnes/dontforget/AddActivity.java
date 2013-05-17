@@ -9,6 +9,10 @@
  */
 package com.md2.rbarnes.dontforget;
 
+import org.apache.http.util.LangUtils;
+
+import com.google.android.gms.maps.model.LatLng;
+
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 import android.app.Activity;
@@ -32,15 +36,36 @@ public class AddActivity extends Activity {
 	private static final int IMAGE_CAPTURE = 0;
     private Uri imageUri;
     private ImageView imageView;
+    private double _lat;
+	private double _lng;
+	private Intent _locationIntent;
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_additem);
         
+        _locationIntent = new Intent(this, LocationPickerActivity.class);
+        
+        Intent intent = getIntent();
+        if (intent != null)
+        {
+            Bundle bundle = getIntent().getExtras();
+            _lat = bundle.getDouble("lat");
+            _lng = bundle.getDouble("lng");
+            if((_lat > 0)&&(_lng > 0))
+            {
+            	_locationIntent.putExtra("lat", _lat);
+    			_locationIntent.putExtra("lng", _lng);
+            }
+        }
+        
+        
         
         imageView = (ImageView)findViewById(R.id.arrowImageView);
-        Button addButton =(Button)findViewById(R.id.button1);
+        
+        
+        Button addButton =(Button)findViewById(R.id.captureButton);
         addButton.setOnClickListener(new OnClickListener() {
 
 		    public void onClick(View v) {
@@ -50,27 +75,37 @@ public class AddActivity extends Activity {
 		    }
 		 });
         
-        
+        Button saveButton =(Button)findViewById(R.id.saveButton);
+        saveButton.setOnClickListener(new OnClickListener() {
+
+		    public void onClick(View v) {
+		    	
+		    	showNotification("Information Saved");
+		    	
+		    	
+		    }
+		 });
         
         ToggleButton alertToggle = (ToggleButton) findViewById(R.id.toggleButton1);
         alertToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    // The toggle is enabled
+                	showNotification("Reminder Enabled");
                 } else {
-                    // The toggle is disabled
+                	showNotification("Reminder Disabled");
                 }
             }
         });
-        final Intent locationIntent = new Intent(this, LocationPickerActivity.class);
+        
         ToggleButton locationToggle = (ToggleButton) findViewById(R.id.ToggleButton01);
         locationToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                	
-        			startActivity(locationIntent);
+       
+        			showNotification("Location Enabled");
+        			launchPlaceSeach();
                 } else {
-                    // The toggle is disabled
+                    showNotification("Location Disabled");
                 }
             }
         });
@@ -141,6 +176,17 @@ public class AddActivity extends Activity {
                 
         }}
         
+    }
+    
+    void showNotification(String msg){
+    	
+    	Crouton.makeText(this, msg, Style.INFO).show();
+    	
+    }
+    void launchPlaceSeach(){
+    	
+    	startActivity(_locationIntent);
+    	
     }
 
 }

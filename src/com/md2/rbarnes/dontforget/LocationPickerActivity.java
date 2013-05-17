@@ -11,12 +11,20 @@ package com.md2.rbarnes.dontforget;
 
 import java.util.List;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 import android.app.Activity;
 import android.app.SearchManager;
 import android.app.SearchableInfo;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,11 +33,29 @@ import android.widget.SearchView;
 public class LocationPickerActivity extends Activity implements SearchView.OnQueryTextListener{
 	
 	private SearchView placesSearchView;
+	private GoogleMap map;
+	private double _lat = 28.59671310;
+	private double _lng = -81.30159879;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map);
+		
+		Crouton.makeText(this, "Looking for places near you!", Style.INFO).show();
+		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+		
+		LatLng latLng = new LatLng(_lat, _lng);
+    	Marker locationPoint = map.addMarker(new MarkerOptions()
+        .position(latLng)
+        .title("You are here!"));
+
+		map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 1));
+
+		// Zoom in, animating the camera.
+		map.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
+		
+		
 	}
 	
 	@Override
@@ -79,7 +105,7 @@ public class LocationPickerActivity extends Activity implements SearchView.OnQue
                     info = inf;
                 }
             }
-            Crouton.makeText(this, "Looking for who called you!", Style.INFO).show();
+            
             placesSearchView.setSearchableInfo(info);
         }
  

@@ -146,33 +146,34 @@ containing a value of this type.
         public static final int simle=0x7f020004;
     }
     public static final class id {
-        public static final int Button01=0x7f04000f;
-        public static final int LinearLayout01=0x7f04000a;
-        public static final int LinearLayout1=0x7f040005;
-        public static final int RelativeLayout1=0x7f040011;
-        public static final int TextView01=0x7f04000b;
-        public static final int ToggleButton01=0x7f04000c;
-        public static final int action_calendar=0x7f040019;
-        public static final int action_list=0x7f04001a;
-        public static final int action_map=0x7f040018;
+        public static final int FormLayout=0x7f040005;
+        public static final int LocationLayout=0x7f04000b;
+        public static final int RelativeLayout1=0x7f040012;
+        public static final int ReminderLayout=0x7f040008;
+        public static final int TextView01=0x7f04000c;
+        public static final int ToggleButton01=0x7f04000d;
+        public static final int action_calendar=0x7f04001a;
+        public static final int action_list=0x7f04001b;
+        public static final int action_map=0x7f040019;
         public static final int arrowImageView=0x7f040006;
-        public static final int button1=0x7f040007;
-        public static final int editText1=0x7f04000d;
-        public static final int editText2=0x7f04000e;
+        public static final int captureButton=0x7f040007;
+        public static final int editText1=0x7f04000e;
+        public static final int editText2=0x7f04000f;
         public static final int hybrid=0x7f040004;
-        public static final int mainListView=0x7f040010;
-        public static final int map=0x7f040014;
-        public static final int menu_add=0x7f040017;
-        public static final int menu_search=0x7f040016;
+        public static final int mainListView=0x7f040011;
+        public static final int map=0x7f040015;
+        public static final int menu_add=0x7f040018;
+        public static final int menu_search=0x7f040017;
         public static final int none=0x7f040000;
         public static final int normal=0x7f040001;
-        public static final int rowTextView=0x7f040015;
+        public static final int rowTextView=0x7f040016;
         public static final int satellite=0x7f040002;
-        public static final int smileImageView=0x7f040013;
+        public static final int saveButton=0x7f040010;
+        public static final int smileImageView=0x7f040014;
         public static final int terrain=0x7f040003;
-        public static final int textView1=0x7f040012;
-        public static final int textView2=0x7f040008;
-        public static final int toggleButton1=0x7f040009;
+        public static final int textView1=0x7f040013;
+        public static final int textView2=0x7f040009;
+        public static final int toggleButton1=0x7f04000a;
     }
     public static final class layout {
         public static final int activity_additem=0x7f030000;
@@ -185,11 +186,14 @@ containing a value of this type.
         public static final int main=0x7f080000;
     }
     public static final class string {
+        public static final int LocationButton=0x7f050021;
+        public static final int ReminderButton=0x7f050022;
         public static final int action_calendar=0x7f050017;
         public static final int action_list=0x7f050018;
         public static final int action_map=0x7f050016;
         public static final int action_settings=0x7f050012;
         public static final int app_name=0x7f050011;
+        public static final int arrowImgText=0x7f050023;
         /**   Title for notification shown when GooglePlayServices is unavailable [CHAR LIMIT=70] 
          */
         public static final int auth_client_availability_notification_title=0x7f05000e;
@@ -260,7 +264,9 @@ containing a value of this type.
         public static final int reminder=0x7f05001a;
         public static final int save_button=0x7f05001d;
         public static final int search=0x7f05001f;
+        public static final int simleImgText=0x7f050024;
         public static final int take_pic=0x7f050015;
+        public static final int takenPic=0x7f050020;
         public static final int title=0x7f05001c;
     }
     public static final class style {
