@@ -142,7 +142,10 @@ public class AddActivity extends Activity {
 			Crouton.makeText(this, "calendar works", Style.INFO).show();
 			return true;
 		case R.id.action_list:
-			Crouton.makeText(this, "list works", Style.INFO).show();
+			
+			Intent listIntent = new Intent(this, ListViewActivity.class);
+			startActivity(listIntent);
+			
 			
 			return true;
 		default:

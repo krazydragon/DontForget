@@ -16,10 +16,14 @@ import de.keyboardsurfer.android.widget.crouton.Style;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -47,7 +51,7 @@ public class MainActivity extends Activity{
         Location location = locationManager.getLastKnownLocation(provider);
 		
 		if(location != null){
-			Crouton.makeText(this, "Your Location was found!", Style.INFO).show();
+			//Crouton.makeText(this, "Your Location was found!", Style.INFO).show();
 			_lat = location.getLatitude(); 
 			_lng = location.getLongitude();
 		}else{
@@ -60,6 +64,8 @@ public class MainActivity extends Activity{
       	if(!connected){
     			Crouton.makeText(this, "No network found!", Style.ALERT).show();
      		}
+      	
+      	showNotication();
 		
 	}
 
@@ -90,7 +96,9 @@ public class MainActivity extends Activity{
 			return true;
 		case R.id.action_calendar:
 	        
-			Crouton.makeText(this, "calendar works", Style.INFO).show();
+			//Crouton.makeText(this, "calendar works", Style.INFO).show();
+			Intent calendarIntent = new Intent(this, CalendarActivity.class);
+			startActivity(calendarIntent);
 			return true;
 		case R.id.action_list:
 			
@@ -104,7 +112,25 @@ public class MainActivity extends Activity{
 		}
 	}
 
-	 
+	private void showNotication(){
+    	
+        Intent intent = new Intent(this, MapActivity.class);
+        PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+        // Build notification
+        NotificationCompat.Builder mBuilder =   new NotificationCompat.Builder(this)
+        .setSmallIcon(R.drawable.simle) // notification icon
+        .setContentTitle("Don't Forget...")
+        .setContentText("Test")
+        .setContentIntent(pIntent)
+        .setAutoCancel(true); // clear notification after click
+        
+        
+        PendingIntent pi = PendingIntent.getActivity(this,0,intent,Intent.FLAG_ACTIVITY_NEW_TASK);
+        mBuilder.setContentIntent(pi);
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.notify(0, mBuilder.build());
+    }
     
 
 }
