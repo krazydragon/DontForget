@@ -69,6 +69,10 @@
     	</receiver>
     	<service android:name="WidgetService"
         	android:permission="android.permission.BIND_REMOTEVIEWS" />
+    	<provider 
+            android:authorities="com.rbarnes.other.LocationContentProvider"
+    		android:name="com.rbarnes.other.LocationContentProvider">
+        </provider>
     </application>
 
 </manifest>

@@ -9,6 +9,9 @@
  */
 package com.md2.rbarnes.dontforget;
 
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.rbarnes.other.LocationContentProvider;
+import com.rbarnes.other.LocationDB;
 import com.rbarnes.other.WebInterface;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
@@ -16,14 +19,14 @@ import de.keyboardsurfer.android.widget.crouton.Style;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.NotificationCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -66,6 +69,15 @@ public class MainActivity extends Activity{
      		}
       	
       	showNotication();
+      	
+      	ContentValues locationData = new ContentValues();
+		locationData.put(LocationDB.COL_TITLE, "test");
+		locationData.put(LocationDB.COL_ADDRESS, "test");
+		locationData.put(LocationDB.COL_CITY, "test");
+		locationData.put(LocationDB.COL_STATE, "test");
+		locationData.put(LocationDB.COL_PHONE, "test");
+		locationData.put(LocationDB.COL_COORDS, "test");
+		getContentResolver().insert(LocationContentProvider.CONTENT_URI,locationData);
 		
 	}
 
@@ -114,22 +126,21 @@ public class MainActivity extends Activity{
 
 	private void showNotication(){
     	
-        Intent intent = new Intent(this, MapActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
         // Build notification
-        NotificationCompat.Builder mBuilder =   new NotificationCompat.Builder(this)
+        
+        Notification noti = new Notification.Builder(this)
         .setSmallIcon(R.drawable.simle) // notification icon
         .setContentTitle("Don't Forget...")
         .setContentText("Test")
-        .setContentIntent(pIntent)
-        .setAutoCancel(true); // clear notification after click
-        
-        
-        PendingIntent pi = PendingIntent.getActivity(this,0,intent,Intent.FLAG_ACTIVITY_NEW_TASK);
-        mBuilder.setContentIntent(pi);
-        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.notify(0, mBuilder.build());
+        .setContentIntent(pIntent).build();
+    NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+    // Hide the notification after its selected
+    noti.flags |= Notification.FLAG_AUTO_CANCEL;
+
+    notificationManager.notify(0, noti);
     }
     
 

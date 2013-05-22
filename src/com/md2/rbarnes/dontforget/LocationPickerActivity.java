@@ -9,14 +9,26 @@
  */
 package com.md2.rbarnes.dontforget;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.rbarnes.other.SearchService;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
@@ -25,26 +37,37 @@ import android.app.SearchManager;
 import android.app.SearchableInfo;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Messenger;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SearchView;
 
 public class LocationPickerActivity extends Activity implements SearchView.OnQueryTextListener{
-	
+	private int userIcon;
 	private SearchView placesSearchView;
 	private GoogleMap map;
 	private double _lat = 28.59671310;
 	private double _lng = -81.30159879;
+	
+	//location manager
+		private LocationManager locMan;
+
+		//user marker
+		private Marker userMarker;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map);
 		
-		Crouton.makeText(this, "Looking for places near you!", Style.INFO).show();
+		//Crouton.makeText(this, "Looking for places near you!", Style.INFO).show();
 		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 		
+		userIcon = R.drawable.ic_launcher; 
 		LatLng latLng = new LatLng(_lat, _lng);
     	Marker locationPoint = map.addMarker(new MarkerOptions()
         .position(latLng)
@@ -133,7 +156,7 @@ public class LocationPickerActivity extends Activity implements SearchView.OnQue
     }
  
     public boolean onQueryTextSubmit(String query) {
-    	
+    	lookupNumber(query);
         return true;
     }
  
@@ -144,5 +167,88 @@ public class LocationPickerActivity extends Activity implements SearchView.OnQue
     protected boolean isAlwaysExpanded() {
         return false;
     }
+    
+    private void updatePlaces(){
+		//get location manager
+    	LocationManager locMan = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+		//get last location
+		Location lastLoc = locMan.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+		double lat = lastLoc.getLatitude();
+		double lng = lastLoc.getLongitude();
+		//create LatLng
+		LatLng lastLatLng = new LatLng(lat, lng);
+
+		//remove any existing marker
+		if(userMarker!=null) userMarker.remove();
+		//create and set marker properties
+		userMarker = map.addMarker(new MarkerOptions()
+		.position(lastLatLng)
+		.title("You are here")
+		.icon(BitmapDescriptorFactory.fromResource(userIcon))
+		.snippet("Your last recorded location"));
+		//move to location
+		map.animateCamera(CameraUpdateFactory.newLatLng(lastLatLng), 3000, null);
+		
+		//build places query string
+		String placesSearchStr = "https://maps.googleapis.com/maps/api/place/nearbysearch/" +
+				"json?location="+lat+","+lng+
+				"&radius=1000&sensor=true" +
+				"&types=food|bar|store|museum|art_gallery"+
+				"&key=your_key_here";//ADD KEY
+	}
+	
+	private class GetPlaces extends AsyncTask<String, Void, String> {
+		@Override
+		protected String doInBackground(String... placesURL) {
+			//fetch places
+			
+			//build result as string
+			StringBuilder placesBuilder = new StringBuilder();
+			//process search parameter string(s)
+			for (String placeSearchURL : placesURL) {
+				HttpClient placesClient = new DefaultHttpClient();
+				try {
+					//try to fetch the data
+					
+					//HTTP Get receives URL string
+					HttpGet placesGet = new HttpGet(placeSearchURL);
+					//execute GET with Client - return response
+					HttpResponse placesResponse = placesClient.execute(placesGet);
+					//check response status
+					StatusLine placeSearchStatus = placesResponse.getStatusLine();
+					//only carry on if response is OK
+					if (placeSearchStatus.getStatusCode() == 200) {
+						//get response entity
+						HttpEntity placesEntity = placesResponse.getEntity();
+						//get input stream setup
+						InputStream placesContent = placesEntity.getContent();
+						//create reader
+						InputStreamReader placesInput = new InputStreamReader(placesContent);
+						//use buffered reader to process
+						BufferedReader placesReader = new BufferedReader(placesInput);
+						//read a line at a time, append to string builder
+						String lineIn;
+						while ((lineIn = placesReader.readLine()) != null) {
+							placesBuilder.append(lineIn);
+						}
+					}
+				}
+				catch(Exception e){ 
+					e.printStackTrace(); 
+				}
+			}
+			return placesBuilder.toString();
+		}
+	}
+	
+	private void lookupNumber(String phoneNumber){
+		//search Internet for business information using the white pages. also setup messenger to receive result
+		Intent searchIntent = new Intent(getApplicationContext(), SearchService.class);
+		
+		
+		
+		
+		startService(searchIntent);
+	}
 
 }

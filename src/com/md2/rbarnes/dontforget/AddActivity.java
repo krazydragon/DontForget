@@ -183,7 +183,7 @@ public class AddActivity extends Activity {
     
     void showNotification(String msg){
     	
-    	Crouton.makeText(this, msg, Style.INFO).show();
+//    	Crouton.makeText(this, msg, Style.INFO).show();
     	
     }
     void launchPlaceSeach(){

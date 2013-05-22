@@ -11,7 +11,7 @@
         android:layout_width="110sp"
         android:layout_height="110sp"
         android:layout_gravity="center"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/simle" />
 
    
 
