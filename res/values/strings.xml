@@ -21,5 +21,6 @@
     <string name="ReminderButton">Reminder Button</string>
     <string name="arrowImgText">arrow image</string>
     <string name="simleImgText">Evil Smile</string>
+    <string name="action_grid">Photo Grid</string>
 
 </resources>

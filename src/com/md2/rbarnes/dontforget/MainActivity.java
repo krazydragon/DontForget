@@ -9,9 +9,9 @@
  */
 package com.md2.rbarnes.dontforget;
 
-import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.rbarnes.other.LocationContentProvider;
 import com.rbarnes.other.LocationDB;
+import com.rbarnes.other.SearchService;
 import com.rbarnes.other.WebInterface;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
@@ -44,6 +44,13 @@ public class MainActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		Intent searchIntent = new Intent(this, SearchService.class);
+		
+		
+		
+		
+		//startService(searchIntent);
 		
 		// Get the location manager
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -78,6 +85,8 @@ public class MainActivity extends Activity{
 		locationData.put(LocationDB.COL_PHONE, "test");
 		locationData.put(LocationDB.COL_COORDS, "test");
 		getContentResolver().insert(LocationContentProvider.CONTENT_URI,locationData);
+		
+		
 		
 	}
 
@@ -116,6 +125,14 @@ public class MainActivity extends Activity{
 			
 			Intent listIntent = new Intent(this, ListViewActivity.class);
 			startActivity(listIntent);
+			
+			
+			return true;
+			
+		case R.id.action_grid:
+			
+			Intent gridIntent = new Intent(this, PhotoGridActivity.class);
+			startActivity(gridIntent);
 			
 			
 			return true;

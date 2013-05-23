@@ -58,6 +58,12 @@
 		</activity>
 		<activity android:name="CalendarActivity">
 		</activity>
+		<activity android:name="PhotoGridActivity">
+		</activity>
+		<service
+            android:name="com.rbarnes.other.SearchService"
+            android:enabled="true" >
+        </service>
 		<receiver android:icon="@drawable/ic_launcher"
         	android:label="@string/app_name"
             android:name="com.rbarnes.other.WidgetProvider">

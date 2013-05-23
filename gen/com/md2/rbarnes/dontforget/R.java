@@ -192,22 +192,24 @@ containing a value of this type.
         public static final int ReminderLayout=0x7f060008;
         public static final int TextView01=0x7f06000c;
         public static final int ToggleButton01=0x7f06000d;
-        public static final int action_calendar=0x7f06001c;
-        public static final int action_list=0x7f06001d;
-        public static final int action_map=0x7f06001b;
+        public static final int action_calendar=0x7f06001d;
+        public static final int action_grid=0x7f06001f;
+        public static final int action_list=0x7f06001e;
+        public static final int action_map=0x7f06001c;
         public static final int arrowImageView=0x7f060006;
         public static final int calendarView1=0x7f060011;
         public static final int captureButton=0x7f060007;
         public static final int editText1=0x7f06000e;
         public static final int editText2=0x7f06000f;
+        public static final int grid_view=0x7f060017;
         public static final int hybrid=0x7f060004;
         public static final int mainListView=0x7f060012;
         public static final int map=0x7f060016;
-        public static final int menu_add=0x7f06001a;
-        public static final int menu_search=0x7f060019;
+        public static final int menu_add=0x7f06001b;
+        public static final int menu_search=0x7f06001a;
         public static final int none=0x7f060000;
         public static final int normal=0x7f060001;
-        public static final int rowTextView=0x7f060017;
+        public static final int rowTextView=0x7f060018;
         public static final int satellite=0x7f060002;
         public static final int saveButton=0x7f060010;
         public static final int smileImageView=0x7f060015;
@@ -215,7 +217,7 @@ containing a value of this type.
         public static final int textView1=0x7f060014;
         public static final int textView2=0x7f060009;
         public static final int toggleButton1=0x7f06000a;
-        public static final int widget_image=0x7f060018;
+        public static final int widget_image=0x7f060019;
     }
     public static final class layout {
         public static final int activity_additem=0x7f030000;
@@ -223,8 +225,9 @@ containing a value of this type.
         public static final int activity_list=0x7f030002;
         public static final int activity_main=0x7f030003;
         public static final int activity_map=0x7f030004;
-        public static final int simplerow=0x7f030005;
-        public static final int widget=0x7f030006;
+        public static final int activity_photo_grid=0x7f030005;
+        public static final int simplerow=0x7f030006;
+        public static final int widget=0x7f030007;
     }
     public static final class menu {
         public static final int main=0x7f0a0000;
@@ -233,6 +236,7 @@ containing a value of this type.
         public static final int LocationButton=0x7f070025;
         public static final int ReminderButton=0x7f070026;
         public static final int action_calendar=0x7f07001b;
+        public static final int action_grid=0x7f070029;
         public static final int action_list=0x7f07001c;
         public static final int action_map=0x7f07001a;
         public static final int action_settings=0x7f070016;
