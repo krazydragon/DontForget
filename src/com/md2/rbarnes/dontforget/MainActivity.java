@@ -75,7 +75,7 @@ public class MainActivity extends Activity{
     			Crouton.makeText(this, "No network found!", Style.ALERT).show();
      		}
       	
-      	showNotication();
+      	
       	
       	ContentValues locationData = new ContentValues();
 		locationData.put(LocationDB.COL_TITLE, "test");
@@ -141,24 +141,7 @@ public class MainActivity extends Activity{
 		}
 	}
 
-	private void showNotication(){
-    	
-        Intent intent = new Intent(this, MainActivity.class);
-        PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
-
-        // Build notification
-        
-        Notification noti = new Notification.Builder(this)
-        .setSmallIcon(R.drawable.simle) // notification icon
-        .setContentTitle("Don't Forget...")
-        .setContentText("Test")
-        .setContentIntent(pIntent).build();
-    NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-    // Hide the notification after its selected
-    noti.flags |= Notification.FLAG_AUTO_CANCEL;
-
-    notificationManager.notify(0, noti);
-    }
+	
     
 
 }

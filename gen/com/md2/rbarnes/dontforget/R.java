@@ -199,7 +199,6 @@ containing a value of this type.
         public static final int arrowImageView=0x7f060006;
         public static final int calendarView1=0x7f060011;
         public static final int captureButton=0x7f060007;
-        public static final int editText1=0x7f06000e;
         public static final int editText2=0x7f06000f;
         public static final int grid_view=0x7f060017;
         public static final int hybrid=0x7f060004;
@@ -216,6 +215,7 @@ containing a value of this type.
         public static final int terrain=0x7f060003;
         public static final int textView1=0x7f060014;
         public static final int textView2=0x7f060009;
+        public static final int titleText=0x7f06000e;
         public static final int toggleButton1=0x7f06000a;
         public static final int widget_image=0x7f060019;
     }
